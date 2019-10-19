@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QuantumGame</string>
+    <string name="startGameButtonLabel">Start Game</string>
+</resources>
