@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.quantumgame.R
 import android.widget.Toast
+import com.example.quantumgame.MainActivity
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -42,6 +43,7 @@ class MainFragment : Fragment() {
     }
 
     private fun startGame() {
+        activity?.supportFragmentManager?.fragments?.get(0)?.startButton?.visibility = View.GONE
         // Get the text fragment instance
         val gameFragment = GameFragment()
 
