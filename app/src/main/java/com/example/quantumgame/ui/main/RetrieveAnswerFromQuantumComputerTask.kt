@@ -31,7 +31,7 @@ internal class RetrieveAnswerFromQuantumComputerTask(val thecallback: (answerStr
 
         //fromServer = inbuf.readLine()
 
-        /*while(true){
+        while(true){
             fromServer = inbuf.readLine()
             if (fromServer != ""){
                 Log.e("task", "inbuf is not null")
@@ -41,14 +41,15 @@ internal class RetrieveAnswerFromQuantumComputerTask(val thecallback: (answerStr
                 Log.e("task", "inbuf is null")
                 System.out.println("not null")
             }
-       }*/
+       }
 
         Log.e("task", "Finishing the task")
+        Log.e("task", fromServer)
         System.out.println("finishing task")
 
         client.close()
 
-        fromServer ="1258745874 4444444444"
+        //fromServer ="1258745874 4444444444"
 
         return fromServer
     }
