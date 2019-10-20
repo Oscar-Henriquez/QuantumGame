@@ -35,7 +35,6 @@ class MainFragment : Fragment() {
             val testgame = GameFragment()
             testgame.startNewGame() //init
             //testgame.addSomeGatesToPlayer1Test()
-            //Toast.makeText(this.context, "You clicked me.", Toast.LENGTH_SHORT).show()
             Toast.makeText(this.context, testgame.getActivePlayerCircuit(), Toast.LENGTH_SHORT).show()
         }
     }

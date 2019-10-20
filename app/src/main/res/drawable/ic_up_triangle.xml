@@ -5,7 +5,7 @@
     android:viewportHeight="100"
     android:viewportWidth="100" >
     <group
-        android:name="triableGroup">
+        android:name="triangleGroup">
         <path
             android:name="triangle"
             android:fillColor="#FF0000"

@@ -2,23 +2,56 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/market"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="230dp"
         android:layout_height="160dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintRight_toLeftOf="@+id/guideline2"
-        android:background="#D2691E"/>
+        app:layout_constraintRight_toLeftOf="@+id/guidelineRight"
+        android:background="#D2691E">
+
+        <include
+            layout="@layout/pack_layout1"
+            android:id="@+id/pack1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="40dp" />
+
+        <include layout="@layout/pack_layout2"
+            android:id="@+id/pack2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"/>
+
+        <include layout="@layout/pack_layout3"
+            android:id="@+id/pack3"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="40dp"/>
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -27,6 +60,115 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.60" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondPlayerLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstPlayerLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
+    <LinearLayout
+        android:id="@+id/firstPlayerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/firstPlayerLine"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        >
+        <ImageView
+            android:id="@+id/firstPlayerFirstQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+
+        <ImageView
+            android:id="@+id/firstPlayerSecondQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+
+        <ImageView
+            android:id="@+id/firstPlayerThirdQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:padding="20dp"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondPlayerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/secondPlayerLine"
+        app:layout_constraintStart_toEndOf="@+id/guidelineRight"
+        >
+        <ImageView
+            android:id="@+id/secondPlayerFirstQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+
+
+        <ImageView
+            android:id="@+id/secondPlayerSecondQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+
+        <ImageView
+            android:id="@+id/secondPlayerThirdQ"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:padding="20dp"
+            android:background="@drawable/ic_circle"
+            android:contentDescription="@string/item_1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondPlayerPacks"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toStartOf="@+id/secondPlayerLayout"
+        app:layout_constraintTop_toTopOf="@+id/secondPlayerLine"
+        app:layout_constraintStart_toStartOf="@id/firstPlayerLayout"
+        />
+
+    <LinearLayout
+        android:id="@+id/firstPlayerPacks"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toEndOf="@+id/firstPlayerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/firstPlayerLine"
+        app:layout_constraintEnd_toEndOf="@id/secondPlayerLayout"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
