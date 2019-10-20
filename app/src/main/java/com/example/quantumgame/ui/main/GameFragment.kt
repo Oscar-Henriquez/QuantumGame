@@ -146,50 +146,63 @@ class GameFragment : Fragment() {
 
     fun getResultFromQuantumComputer():String{
         val client = Socket("192.168.43.49", 9999)
-        client.outputStream.write(player1.circuit.getCircuitString().toByteArray(Charset.defaultCharset()))
-        client.outputStream.write(player2.circuit.getCircuitString().toByteArray(Charset.defaultCharset()))
+        var outStr = player1.circuit.getCircuitString() + " " + player2.circuit.getCircuitString()
+        client.outputStream.write(outStr.toByteArray(Charset.defaultCharset()))
         client.close()
 
-       return evaluateResults(retrieveAnswer())
+       return findWinner(retrieveAnswer())
     }
 
+
     // from here: https://stackoverflow.com/questions/56535473/how-to-send-and-receive-strings-through-tcp-connection-using-kotlin
-    fun retrieveAnswer():ArrayList<String> {
-        var answers:ArrayList<String> = ArrayList<String>()
+    fun retrieveAnswer():String {
+        //var answers:ArrayList<String> = ArrayList<String>()
+        var answer:String = ""
         val server = ServerSocket(9999)
         println("Server running on port ${server.localPort}")
         val client = server.accept()
         println("Client connected : ${client.inetAddress.hostAddress}")
         val scanner = Scanner(client.inputStream)
         while (scanner.hasNextLine()) {
-            answers.add(scanner.nextLine())
-            //break
+            answer = scanner.nextLine()
+            break
         }
         server.close()
-        return answers
+        return answer
+    }
+
+    fun updatePlayerResult(player:Player, answer:String){
+        for (i in 0..answer.length){
+            if (answer.get(i).toInt() == goal.goalColor.getID()){
+                player.points++
+                player.colorResult.add(QuantumColor(answer.get(i).toInt()))
+            }
+        }
     }
 
     // interpret the two received results
     // compare against the goal
     // return the winner
-    fun evaluateResults(answers: ArrayList<String>):String{
-        var answerPlayer1 = answers[0]
-        var answerPlayer2 = answers[1]
-        var answerGoal    = goal.getAnswerStr()
+    fun findWinner(answer:String):String{
+        val parts = answer.split(" ")
+        var answerPlayer1 = parts[0]
+        var answerPlayer2 = parts[1]
+
         var player1won: Boolean = false
         var player2won: Boolean = false
         var tie : Boolean = false
         var result:String = "tie"
 
-        if (answerPlayer1.equals(answerGoal)){
+        updatePlayerResult(player1, answerPlayer1)
+        updatePlayerResult(player2, answerPlayer2)
+
+        if (player1.points > player2.points){
             player1won = true
             result = "player1"
-        }
-        if (answerPlayer2.equals(answerGoal)){
+        } else if (player2.points < player1.points){
             player2won = true
             result = "player2"
-        }
-        if (player1won && player2won){
+        }else{
             tie = true
             result = "tie"
         }
