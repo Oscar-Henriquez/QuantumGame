@@ -228,8 +228,9 @@ class GameFragment : Fragment() {
 
     fun updatePlayerResult(player:Player, answer:String){
         for (i in 0..(answer.length-1)){
-            if (answer.get(i).toInt() == goal.goalColor.getID()){
+            if (answer.get(i).toString().equals(goal.goalColor.getID().toString())){
                 player.points++
+                Log.e("points",player.points.toString())
                 player.colorResult.add(QuantumColor(answer.get(i).toInt()))
             }
         }
@@ -248,8 +249,14 @@ class GameFragment : Fragment() {
         var tie : Boolean = false
         var result:String = "tie"
 
+        Log.e("player1 answer", answerPlayer1)
+        Log.e("player2 answer", answerPlayer2)
+
         updatePlayerResult(player1, answerPlayer1)
         updatePlayerResult(player2, answerPlayer2)
+
+        Log.e("player1 points", player1.points.toString())
+        Log.e("player2 points", player2.points.toString())
 
         if (player1.points > player2.points){
             player1won = true

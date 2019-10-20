@@ -28,6 +28,9 @@ internal class RetrieveAnswerFromQuantumComputerTask(val thecallback: (answerStr
         var fromServer = ""
         Log.e("task", "before readline")
         System.out.println("before readline")
+
+        //fromServer = inbuf.readLine()
+
         /*while(true){
             fromServer = inbuf.readLine()
             if (fromServer != ""){
