@@ -2,6 +2,7 @@ package com.example.quantumgame.ui.main
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,10 +79,13 @@ class GameFragment : Fragment() {
         roundsTotal = nrRounds
         roundsCurrent = 0.0
         randomGatesList = createAllPacks(4,3) // from here we pick the gates for the market
-        for (i in 0..marketSize){
+        for (i in 0..(marketSize-1)){
             market.add(addNewGateComboToMarket())
         }
         goal = Goal(3)
+
+        //now lets make a fake random goal that is always 4
+        goal.goalColor= QuantumColor(4)
     }
 
     fun addNewGateComboToMarket():GateCombo{
@@ -141,7 +145,7 @@ class GameFragment : Fragment() {
         allPacks.add(view.findViewById<ConstraintLayout>(R.id.pack1))
         val pack2 = view.findViewById<ConstraintLayout>(R.id.pack2)
         val pack3 = view.findViewById<ConstraintLayout>(R.id.pack3)
-        for (i in 0..market.size) {
+        for (i in 0..(market.size-1)) {
             //pack1.background = resources.getDrawable(grabCorrectIcon(market[i].gate1.type))
         }
     }
@@ -158,11 +162,11 @@ class GameFragment : Fragment() {
     fun createRandomSet(numberOfGates: Int, numberInPack: Int): ArrayList<Int> {
         val list = ArrayList<Int>()
         val finalList = ArrayList<Int>()
-        for (i in 0..numberOfGates) {
+        for (i in 0..(numberOfGates-1)) {
             list.add(i)
         }
         Collections.shuffle(list)
-        for (i in 0..numberInPack) {
+        for (i in 0..(numberInPack-1)) {
             finalList.add(list[i])
         }
         return finalList
@@ -171,7 +175,7 @@ class GameFragment : Fragment() {
     fun createAllPacks(numberOfGates: Int, numberInPack: Int): ArrayList<ArrayList<Int>> {
         var list = ArrayList<ArrayList<Int>>()
         var numberOfPacks:Double = (numberOfGates.toDouble()).pow(numberInPack) //nr in pack is nr of qbits
-        for (i in 0..numberOfPacks.toInt()) {
+        for (i in 0..(numberOfPacks.toInt()-1)) {
             list.add(createRandomSet(numberOfGates, numberInPack))
         }
         return list
@@ -181,15 +185,27 @@ class GameFragment : Fragment() {
 
         var outStr = player1.circuit.getCircuitString() + " " + player2.circuit.getCircuitString()
 
+        if (outStr.length != 25){
+            outStr = "aaabbbhhhiii aaabbbhhhiii" // send something if we dont manage to play correctly
+        }
+
+
         qtask.execute(outStr)
 
         return ""
     }
 
     fun thetaskcallback(answerstr:String){
-        //var winner = findWinner(answerstr)
+
+
+        System.out.println(answerstr+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+        var winner = findWinner(answerstr)
+
+        Log.e("winner", winner+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
         //TODO: call the last screen here
-        print(answerstr)
+
     }
 
 
@@ -211,7 +227,7 @@ class GameFragment : Fragment() {
     }
 
     fun updatePlayerResult(player:Player, answer:String){
-        for (i in 0..answer.length){
+        for (i in 0..(answer.length-1)){
             if (answer.get(i).toInt() == goal.goalColor.getID()){
                 player.points++
                 player.colorResult.add(QuantumColor(answer.get(i).toInt()))
