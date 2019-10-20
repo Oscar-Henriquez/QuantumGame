@@ -1,5 +1,6 @@
 package com.example.quantumgame.ui.main
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.quantumgame.R
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.*
@@ -55,6 +58,8 @@ class GameFragment : Fragment() {
     var marketSize: Int = 3
     var roundsTotal: Double = 4.0
     var roundsCurrent: Double = 0.0
+
+    private var qtask:RetrieveAnswerFromQuantumComputerTask = RetrieveAnswerFromQuantumComputerTask(::thetaskcallback)
 
     fun getActivePlayerName():String {
         return activePlayer.getName()
@@ -155,7 +160,7 @@ class GameFragment : Fragment() {
         }
         Collections.shuffle(list)
         for (i in 0..numberInPack) {
-            finalList[i] =  list[i]
+            finalList.add(list[i])
         }
         return finalList
     }
@@ -170,12 +175,18 @@ class GameFragment : Fragment() {
     }
 
     fun getResultFromQuantumComputer():String{
-        val client = Socket("192.168.43.49", 9999)
-        var outStr = player1.circuit.getCircuitString() + " " + player2.circuit.getCircuitString()
-        client.outputStream.write(outStr.toByteArray(Charset.defaultCharset()))
-        client.close()
 
-       return findWinner(retrieveAnswer())
+        var outStr = player1.circuit.getCircuitString() + " " + player2.circuit.getCircuitString()
+
+        qtask.execute(outStr)
+
+        return ""
+    }
+
+    fun thetaskcallback(answerstr:String){
+        //var winner = findWinner(answerstr)
+        //TODO: call the last screen here
+        print(answerstr)
     }
 
 
@@ -183,7 +194,7 @@ class GameFragment : Fragment() {
     fun retrieveAnswer():String {
         //var answers:ArrayList<String> = ArrayList<String>()
         var answer:String = ""
-        val server = ServerSocket(9999)
+        val server = ServerSocket(65432)
         println("Server running on port ${server.localPort}")
         val client = server.accept()
         println("Client connected : ${client.inetAddress.hostAddress}")
@@ -233,5 +244,6 @@ class GameFragment : Fragment() {
         }
         return result
     }
+
 
 }
