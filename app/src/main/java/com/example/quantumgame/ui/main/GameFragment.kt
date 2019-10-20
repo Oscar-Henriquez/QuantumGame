@@ -42,7 +42,7 @@ class GameFragment : Fragment() {
         val marketClick = view.findViewById(R.id.market) as LinearLayout
         // set on-click listener
         marketClick.setOnClickListener {
-            Toast.makeText(context, "You clicked me.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getResultFromQuantumComputer(), Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -137,7 +137,10 @@ class GameFragment : Fragment() {
     }*/
 
     fun setUpGameUI(view: View) {
-        val pack1 = view.findViewById<ConstraintLayout>(R.id.pack1)
+        val allPacks = ArrayList<ConstraintLayout>()
+        allPacks.add(view.findViewById<ConstraintLayout>(R.id.pack1))
+        val pack2 = view.findViewById<ConstraintLayout>(R.id.pack2)
+        val pack3 = view.findViewById<ConstraintLayout>(R.id.pack3)
         for (i in 0..market.size) {
             //pack1.background = resources.getDrawable(grabCorrectIcon(market[i].gate1.type))
         }
