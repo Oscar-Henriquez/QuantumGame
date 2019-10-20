@@ -20,6 +20,9 @@ class Player () {
         field = value
     }
 
+    var points:Int = 0
+    var colorResult:ArrayList<QuantumColor> = ArrayList<QuantumColor>()
+
 
     fun getName():String{
         return this.playerName
