@@ -32,6 +32,10 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             // your code to perform when the user clicks on the button
             startGame()
+            val testgame = GameFragment()
+            testgame.startNewGame() //init
+            //testgame.addSomeGatesToPlayer1Test()
+            Toast.makeText(this.context, testgame.getActivePlayerCircuit(), Toast.LENGTH_SHORT).show()
         }
     }
 
