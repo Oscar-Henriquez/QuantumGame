@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.quantumgame.R
 import java.util.*
@@ -33,6 +35,13 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpGameUI(view)
+        // get reference to button
+        val marketClick = view.findViewById(R.id.market) as LinearLayout
+        // set on-click listener
+        marketClick.setOnClickListener {
+            Toast.makeText(context, "You clicked me.", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private var activePlayer: Player = Player()
@@ -42,10 +51,10 @@ class GameFragment : Fragment() {
 
     var randomGatesList:  ArrayList<ArrayList<Int>> =  ArrayList<ArrayList<Int>>()
     var goal: Goal = Goal(3)
-    var market: ArrayList<GateCombo> = ArrayList<GateCombo>();
-    var marketSize: Int = 3;
-    var roundsTotal: Double = 4.0;
-    var roundsCurrent: Double = 0.0;
+    var market: ArrayList<GateCombo> = ArrayList<GateCombo>()
+    var marketSize: Int = 3
+    var roundsTotal: Double = 4.0
+    var roundsCurrent: Double = 0.0
 
     fun getActivePlayerName():String {
         return activePlayer.getName()
@@ -122,9 +131,20 @@ class GameFragment : Fragment() {
         player1.circuit.addGate(gate)
     }*/
 
-
     fun setUpGameUI(view: View) {
+        val pack1 = view.findViewById<ConstraintLayout>(R.id.pack1)
+        for (i in 0..market.size) {
+            //pack1.background = resources.getDrawable(grabCorrectIcon(market[i].gate1.type))
+        }
+    }
 
+    fun grabCorrectIcon(gateType: Int): Int {
+        when (gateType) {
+            0 -> return R.drawable.ic_circle
+            1 -> return R.drawable.ic_up_triangle
+            2 -> return R.drawable.ic_rectangle
+        }
+        return R.drawable.ic_rectangle
     }
 
     fun createRandomSet(numberOfGates: Int, numberInPack: Int): ArrayList<Int> {

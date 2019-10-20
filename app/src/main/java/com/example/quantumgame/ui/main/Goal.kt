@@ -15,7 +15,7 @@ class Goal(nrQbitsInit:Int = 3) {
         return answer
     }
 
-    fun generateGoal(): ArrayList<Int> {
+    private fun generateGoal(): ArrayList<Int> {
         val list = ArrayList<Int>()
 
         for (i in 0..nrQbits) {
