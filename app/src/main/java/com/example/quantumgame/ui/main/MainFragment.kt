@@ -32,7 +32,6 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             // your code to perform when the user clicks on the button
             startGame()
-            Toast.makeText(this.context, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
     }
 

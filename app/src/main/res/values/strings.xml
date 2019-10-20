@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">QuantumGame</string>
     <string name="startGameButtonLabel">Start Game</string>
+    <string name="item_1">item1</string>
+    <string name="item_2">item2</string>
+    <string name="item_3">item3</string>
+
 </resources>
