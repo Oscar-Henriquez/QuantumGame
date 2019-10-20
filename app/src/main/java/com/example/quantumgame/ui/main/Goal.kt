@@ -14,20 +14,10 @@ class Goal(nrQbitsInit:Int = 3) {
         }
         return answer
     }*/
-    fun generateGoal(): QuantumColor{
+
+    private fun generateGoal(): QuantumColor{
        var qc: QuantumColor = QuantumColor()
        qc.makeRandom(8)
         return qc
     }
-    
-    private fun generateGoal(): ArrayList<Int> {
-        val list = ArrayList<Int>()
-
-        for (i in 0..nrQbits) {
-            list.add((0..1).random())
-        }
-        Collections.shuffle(list)
-
-        return list
-    }*/
 }
