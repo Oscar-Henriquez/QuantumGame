@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.quantumgame.R
 import android.widget.Toast
-import com.example.quantumgame.MainActivity
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -32,10 +31,6 @@ class MainFragment : Fragment() {
         startButton.setOnClickListener {
             // your code to perform when the user clicks on the button
             startGame()
-            val testgame = GameFragment()
-            testgame.startNewGame() //init
-            //testgame.addSomeGatesToPlayer1Test()
-            Toast.makeText(this.context, testgame.getActivePlayerCircuit(), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -48,8 +43,10 @@ class MainFragment : Fragment() {
     private fun startGame() {
         activity?.supportFragmentManager?.fragments?.get(0)?.startButton?.visibility = View.GONE
         // Get the text fragment instance
-        val gameFragment = GameFragment()
-
+        val testgame = GameFragment()
+        testgame.startNewGame() //init
+        //testgame.addSomeGatesToPlayer1Test()
+        Toast.makeText(this.context, testgame.getActivePlayerCircuit(), Toast.LENGTH_SHORT).show()
         // Get the support fragment manager instance
         val manager = activity?.supportFragmentManager
 
@@ -57,7 +54,7 @@ class MainFragment : Fragment() {
         val transaction = manager?.beginTransaction()
 
         // Replace the fragment on container
-        transaction?.replace(R.id.main,gameFragment)
+        transaction?.replace(R.id.main,testgame)
         transaction?.addToBackStack(null)
 
         // Finishing the transition
